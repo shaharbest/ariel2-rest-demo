@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
 
-const uri = `mongodb://127.0.0.1:27017`;
+const host = process.env.DB_HOST;
+const protocol = process.env.DB_PROTOCOL;
+const uri = `${protocol}://${host}`;
 const dbName = 'avibiter';
 
 function connect() {
     mongoose.connect(uri, {
+        user: process.env.DB_USER,
+        pass: process.env.DB_PASS,
         dbName,
     });
 }
