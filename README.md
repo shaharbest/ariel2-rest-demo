@@ -9,7 +9,7 @@ npm init -y
 add packages we need
 
 ```sh
-npm i express mongoose bcrypt jsonwebtoken
+npm i express mongoose bcrypt jsonwebtoken dotenv
 ```
 
 install nodemon in devDependencies

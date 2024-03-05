@@ -16,7 +16,7 @@ function auth(req, res, next) {
     }
 
     try {
-        const data = jwt.verify(token, '123');
+        const data = jwt.verify(token, process.env.JWT_SECRET);
         req.user = data;
         next();
     }
