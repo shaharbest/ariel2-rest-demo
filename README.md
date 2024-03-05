@@ -1,1 +1,3 @@
-# ariel2-rest-demo
+# Ariel2 Rest Demo
+
+hi ariel
