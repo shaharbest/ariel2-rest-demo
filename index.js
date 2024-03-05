@@ -6,6 +6,10 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
+app.get('/ping', (req, res) => {
+    res.send('pong');
+})
+
 app.use('/users', require('./routes/usersRoutes'));
 app.use('/tasks', require('./routes/tasksRoutes'));
 
