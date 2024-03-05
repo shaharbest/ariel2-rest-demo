@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const router = express.Router();
+const auth = require('../middlewares/auth');
 
 // signup
 router.post('/', async (req, res) => {
@@ -47,6 +48,7 @@ router.post('/login', async (req, res) => {
     const dataForToken = {
         name: user.name,
         email: user.email,
+        id: user._id,
     };
 
     const token = jwt.sign(dataForToken, '123');
@@ -54,21 +56,8 @@ router.post('/login', async (req, res) => {
     res.json({ token });
 });
 
-router.post('/secret', (req, res) => {
-    const authHeader = req.headers.authorization;
-    const token = authHeader.split(' ')[1];
-
-    try {
-        const data = jwt.verify(token, '123');
-        console.log(data);
-    }
-    catch (err) {
-        console.error(err);
-        res.status(400).send('bad token');
-        return;
-    }
-
-    res.send('I like cheese');
+router.get('/whoami', auth, (req, res) => {
+    res.send(req.user.name);
 });
 
 module.exports = router;
